@@ -22,6 +22,30 @@ module.exports = function() {
 		renderTable();
 	});
 
+  if (app.stats.modules[0].time) {
+    $(document).on('click', '.time-th', function(){
+      sortDir = sortDir === 'desc' ? 'asc' : 'desc';
+      app.stats.modules.sort(function(a, b) {
+        return sortDir === 'asc'
+          ? b.time - a.time
+          : a.time - b.time;
+      });
+      renderTable();
+    });
+  }
+
+  if (app.stats.modules[0].timestamp) {
+    $(document).on('click', '.timestamp-th', function(){
+      sortDir = sortDir === 'desc' ? 'asc' : 'desc';
+      app.stats.modules.sort(function(a, b) {
+        return sortDir === 'asc'
+          ? b.timestamp - a.timestamp
+          : a.timestamp - b.timestamp;
+      });
+      renderTable();
+    });
+  }
+
 	modulesGraph.show();
 	modulesGraph.setNormal();
 	return function() {
